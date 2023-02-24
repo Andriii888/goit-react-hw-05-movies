@@ -11,9 +11,7 @@ const SiteRoutes =()=>{
   return(
   <Suspense fallback={<p>...loading</p>}>
     <Routes>
-      <Route path="/" element={<Home />} >
-      <Route path=":movieId" element={<MovieDetails />}/>
-        </Route>
+      <Route path="/" element={<Home />}/>
       <Route path="/movies" element={<Movies />} />
       <Route path="/movies/:movieId" element={<MovieDetails />}>
         <Route path="cast" element={<Cast />} />
