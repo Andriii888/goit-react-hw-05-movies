@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Cast = () => {
   const [infoActors, setimgActors] = useState([]);
-  const [imgURL] = useState('https://image.tmdb.org/t/p/original');
+  const [imgURL] = useState('/nAEw0wWZ5JOnqxwHI34xe1GxIIc.jpg');
 
   const { movieId } = useParams();
   useEffect(() => {
@@ -23,7 +23,9 @@ const Cast = () => {
                 return (
                   <li key={original_name ?? name}>
                     <img
-                      src={`https://image.tmdb.org/t/p/original${profile_path}`}
+                      src={`https://image.tmdb.org/t/p/original${
+                        profile_path ?? imgURL
+                      }`}
                       width="200px"
                       height="250px"
                       alt=""
@@ -43,4 +45,5 @@ const Cast = () => {
 
   return <ul>{infoActors}</ul>;
 };
+
 export default Cast;

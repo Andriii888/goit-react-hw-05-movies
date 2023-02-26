@@ -11,8 +11,7 @@ const MovieDetails = () => {
   const [genresMovie, setgenres] = useState('');
   const [release_date, setrelease_date] = useState('');
   const [overview, setoverview] = useState('');
-  const [poster_path, setposter_path] = useState('');
-  const [imgURL] = useState('https://image.tmdb.org/t/p/original');
+  const [imgURL, setimgUrl] = useState('');
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/movies';
 
@@ -45,7 +44,9 @@ const MovieDetails = () => {
             });
             setrelease_date(() => release_date);
             setoverview(overview);
-            setposter_path(poster_path);
+            axios
+              .get(`https://image.tmdb.org/t/p/original${poster_path}`)
+              .then(({ request }) => setimgUrl(request.responseURL));
           });
       } catch (error) {
         console.log(error.message);
@@ -58,7 +59,7 @@ const MovieDetails = () => {
     <section>
       <MovieDetailsStyle className="infoMovieContainer">
         <Link to={backLinkHref}>Go back</Link>
-        <img src={imgURL + poster_path} width="300px" height="350px" alt="" />
+        <img src={imgURL} width="300px" height="350px" alt="" />
         <div className="infoMovie">
           <h1>
             {name ?? title}
