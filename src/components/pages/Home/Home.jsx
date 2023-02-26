@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Outlet} from 'react-router-dom';
-// import API from '../../API/API';
+import { Outlet } from 'react-router-dom';
 import MoviesList from '../../pages/MoviesList/MoviesList';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const API = () => {
     return axios.get(
@@ -16,12 +14,10 @@ const Home = () => {
   useEffect(() => {
     async function fetchMovies() {
       try {
-        setLoading(true);
-        await API().then(({data})=>setMovies([...data.results]));
+        await API().then(({ data }) => setMovies([...data.results]));
       } catch (error) {
         setError(error.message);
       } finally {
-        setLoading(false);
       }
     }
     fetchMovies();
@@ -30,8 +26,9 @@ const Home = () => {
   return (
     <>
       <MoviesList data={movies} />
-      <Outlet/>
-         </>
+      {error && <h1>{error}</h1>}
+      <Outlet />
+    </>
   );
 };
 MoviesList.defaultProps = {

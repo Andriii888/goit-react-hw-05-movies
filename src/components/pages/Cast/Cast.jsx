@@ -8,6 +8,9 @@ const Cast = () => {
 
   const { movieId } = useParams();
   useEffect(() => {
+    if (infoActors.length > 0) {
+      return;
+    }
     async function fetchActorsInfo() {
       try {
         await axios
@@ -15,14 +18,21 @@ const Cast = () => {
             `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=dbe66e1851c0a98cf79fd3fa903ac46b`
           )
           .then(({ data }) => {
-              setimgActors(()=>data.cast.map(({ original_name, profile_path }) => {
+            setimgActors(() =>
+              data.cast.map(({ original_name, name, profile_path }) => {
                 return (
-                  <li key={profile_path}>
-                    <img src={imgURL+ profile_path} width="200px" height="250px"alt="" />
+                  <li key={original_name ?? name}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${profile_path}`}
+                      width="200px"
+                      height="250px"
+                      alt=""
+                    />
                     <p>{original_name}</p>
                   </li>
                 );
-              }))
+              })
+            );
           });
       } catch (error) {
         console.log(error.message);
@@ -31,10 +41,6 @@ const Cast = () => {
     fetchActorsInfo();
   }, [imgURL, infoActors, movieId]);
 
-  return (
-    <ul>
-      {infoActors}
-    </ul>
-  );
+  return <ul>{infoActors}</ul>;
 };
 export default Cast;
