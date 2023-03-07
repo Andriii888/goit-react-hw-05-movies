@@ -1,4 +1,4 @@
 const NotFoundPage = () => {
-  return <div>this page is not found</div>;
+  return <div>We dont have any reviews for this movie</div>;
 };
 export default NotFoundPage;

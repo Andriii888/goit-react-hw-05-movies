@@ -43,7 +43,14 @@ const Cast = () => {
     fetchActorsInfo();
   }, [imgURL, infoActors, movieId]);
 
-  return <ul>{infoActors}</ul>;
+  return (
+    <ul>
+      {infoActors}
+      {infoActors.length === 0 && (
+        <h1>We dont have any reviews for this movie</h1>
+      )}
+    </ul>
+  );
 };
 
 export default Cast;

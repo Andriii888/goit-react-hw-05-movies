@@ -41,7 +41,7 @@ const Reviews = () => {
   return (
     <ul>
       {reviews}
-      {reviews.length === 0 && <h1>There is nothing to show</h1>}
+      {reviews.length === 0 && <h1>We dont have any reviews for this movie</h1>}
     </ul>
   );
 };

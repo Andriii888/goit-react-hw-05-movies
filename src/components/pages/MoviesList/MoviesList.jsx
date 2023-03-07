@@ -5,7 +5,7 @@ const MoviesList = ({ data }) => {
   const elements = data.map(({ title, name, id }) => {
     return (
       <li key={id}>
-        <Link to={`${id}`} state={{ from: location }}>
+        <Link to={`/movies/${id}` ?? `${id}`} state={{ from: location }}>
           {title ?? name}
         </Link>
       </li>
