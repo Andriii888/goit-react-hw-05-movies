@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/540.50af9804.chunk.js","mappings":"0JAGA,UAHqB,WACnB,OAAO,oEACR,C","sources":["components/pages/NotFoundPage/NotFoundPage.jsx"],"sourcesContent":["const NotFoundPage = () => {\n  return <div>We dont have any reviews for this movie</div>;\n};\nexport default NotFoundPage;\n"],"names":[],"sourceRoot":""}
