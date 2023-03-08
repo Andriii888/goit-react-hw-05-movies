@@ -1,5 +1,5 @@
-import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, Link, Outlet, useLocation ,useNavigate} from 'react-router-dom';
+import { useEffect, useState,useCallback } from 'react';
 import axios from 'axios';
 import MovieDetailsStyle from './MovieDetails.styled';
 
@@ -13,7 +13,7 @@ const MovieDetails = () => {
   const [overview, setoverview] = useState('');
   const [imgURL, setimgUrl] = useState('');
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  // const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     if (!movieId) {
@@ -54,11 +54,14 @@ const MovieDetails = () => {
     }
     fetchMovieById();
   }, [movieId]);
+  const navigate = useNavigate();
+  const from = location.state?.from || "/"; 
+  const goBack = useCallback(()=> navigate(from), [from, navigate]);
 
   return (
     <section>
       <MovieDetailsStyle className="infoMovieContainer">
-        <Link to={backLinkHref}>Go back</Link>
+        <button type='button' onClick={goBack} >Go back</button>
         <img src={imgURL} width="300px" height="350px" alt="" />
         <div className="infoMovie">
           <h1>
@@ -75,14 +78,16 @@ const MovieDetails = () => {
             <Link
               className="infoLink"
               to="cast"
-              state={{ from: location.state.from }}
+              state={{from}}
+              // { from: location.state.from }
             >
               Cast
             </Link>
             <Link
               className="infoLink"
               to="reviews"
-              state={{ from: location.state.from }}
+              state={{from}}
+              // { from: location.state.from }
             >
               Reviews
             </Link>
